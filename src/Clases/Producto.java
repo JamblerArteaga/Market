@@ -25,13 +25,13 @@ public class Producto {
 
     public Producto() {
 
-        listaProducto.add(new Producto(idN++, "Producto1", 15.50, "Helado"));
-        listaProducto.add(new Producto(idN++,"Producto2", 20.25, "Frijoles en lata"));
-        listaProducto.add(new Producto(idN++,"Producto2", 1.50, "libra de sal"));
-        listaProducto.add(new Producto(idN++,"Producto2", 10.25, "Incaparina"));
-        listaProducto.add(new Producto(idN++,"Producto2", 26.75, "Cereal"));
-        listaProducto.add(new Producto(idN++,"Producto2", 30.25, "Jabon en Polvo"));
-        listaProducto.add(new Producto(idN++,"Producto2", 10.30, "papel higienico"));
+        listaProducto.add(new Producto(idN++,"Sarita", 15.50, "Helado Fresa 2 lt"));
+        listaProducto.add(new Producto(idN++,"Frijoles en lata", 20.25, "Ducal 2095g"));
+        listaProducto.add(new Producto(idN++,"Azuca Caña Real", 12.50, "Azucar 5lb"));
+        listaProducto.add(new Producto(idN++,"Incaparina", 10.25, "Comestibles"));
+        listaProducto.add(new Producto(idN++,"Cereal", 26.75, "Choco Krispis 450g"));
+        listaProducto.add(new Producto(idN++,"Javon en Polvo", 30.25, "Xedex 500gr"));
+        listaProducto.add(new Producto(idN++,"Papel higienico", 10.30, "Scoot 4 unidades"));
         
      
     }
