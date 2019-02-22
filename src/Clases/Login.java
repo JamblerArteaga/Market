@@ -79,6 +79,8 @@ public class Login {
             System.out.println("6. Ver Clientes");
             System.out.println("7. Agregar productos");
             System.out.println("8. Ver Productos");
+            System.out.println("9. Actualizar Producto");
+                
             opcion = scan.nextInt();
             switch (opcion) {
                 case 1:
@@ -156,6 +158,11 @@ public class Login {
                     Pr.ver_producto();
                     this.ingresar_sistema();
                     break; 
+                case 9:
+                    Pr.actualizar_pruducto();
+                    this.ingresar_sistema();
+                    break;
+                    
                 default:
                     System.out.println("Opción no existe");
             }

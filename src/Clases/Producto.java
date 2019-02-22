@@ -36,13 +36,13 @@ public class Producto {
 
     public Producto() {
 
-        listaProducto.add(new Producto(idN++, "Producto1", 15.50, "Helado"));
-        listaProducto.add(new Producto(idN++,"Producto2", 20.25, "Frijoles en lata"));
-        listaProducto.add(new Producto(idN++,"Producto2", 1.50, "libra de sal"));
-        listaProducto.add(new Producto(idN++,"Producto2", 10.25, "Incaparina"));
-        listaProducto.add(new Producto(idN++,"Producto2", 26.75, "Cereal"));
-        listaProducto.add(new Producto(idN++,"Producto2", 30.25, "Jabon en Polvo"));
-        listaProducto.add(new Producto(idN++,"Producto2", 10.30, "papel higienico"));
+        listaProducto.add(new Producto(idN++,"Sarita", 15.50, "Helado Fresa 2 lt"));
+        listaProducto.add(new Producto(idN++,"Frijoles en lata", 20.25, "Ducal 2095g"));
+        listaProducto.add(new Producto(idN++,"Azuca Caña Real", 12.50, "Azucar 5lb"));
+        listaProducto.add(new Producto(idN++,"Incaparina", 10.25, "Comestibles"));
+        listaProducto.add(new Producto(idN++,"Cereal", 26.75, "Choco Krispis 450g"));
+        listaProducto.add(new Producto(idN++,"Javon en Polvo", 30.25, "Xedex 500gr"));
+        listaProducto.add(new Producto(idN++,"Papel higienico", 10.30, "Scoot 4 unidades"));
         
      
     }
@@ -112,8 +112,86 @@ public class Producto {
         descripcionPr = scanSTR.nextLine();
         
         listaProducto.add(new Producto(idN++, tituloPr, precioPr, descripcionPr));
-        int a=0;
+        
 
+    }
+    
+    public void actualizar_pruducto() {
+        Scanner scan = new Scanner(System.in);
+        Scanner scan2 = new Scanner(System.in).useLocale(Locale.US);
+        Scanner scan3 = new Scanner(System.in);
+        
+        int opcionActualizar = 0;
+        int opcion = 0;
+        String nuevoTitulo = "";
+        double nuevoPrecio = 0.00;
+        String nuevoDescripcion ="";
+        
+        
+        System.out.println("Ingrese el ID del producto que desea actualizar");
+        opcionActualizar = scan.nextInt();
+        for (int i = 0; i < listaProducto.size(); i++) {
+            if (opcionActualizar == listaProducto.get(i).id) {
+                System.out.println("El titulo es: " + listaProducto.get(i).titulo);
+                System.out.println("Desea actualizarlo?");
+                System.out.println("1. SI");
+                System.out.println("2. NO");
+                opcion = scan.nextInt();
+                switch (opcion) {
+                    case 1:
+                        System.out.println("Ingrese nuevo titulo");
+                        nuevoTitulo = scan2.nextLine();
+                        listaProducto.get(i).setTitulo(nuevoTitulo);
+                        opcion = 0;
+                        break;
+                    case 2:
+                        opcion = 0;
+                        break;
+                    default:
+                        System.out.println("Opción no existe");
+                }
+                
+                
+                System.out.println("El precio es: " + listaProducto.get(i).precio);
+                System.out.println("Desea actualizarlo?");
+                System.out.println("1. SI");
+                System.out.println("2. NO");
+                opcion = scan.nextInt();
+                switch (opcion) {
+                    case 1:
+                        System.out.println("Ingrese nuevo precio");
+                        nuevoPrecio = scan2.nextDouble();
+                        listaProducto.get(i).setPrecio(nuevoPrecio);
+                        opcion = 0;
+                        break;
+                    case 2:
+                        opcion = 0;
+                        break;
+                    default:
+                        System.out.println("Opción no existe");
+                }
+                System.out.println("La Descripcion es: " + listaProducto.get(i).descripcion);
+                System.out.println("Desea actualizarlo?");
+                System.out.println("1. SI");
+                System.out.println("2. NO");
+                opcion = scan.nextInt();
+                switch (opcion) {
+                    case 1:
+                        System.out.println("Ingrese nueva descripcion");
+                        nuevoDescripcion = scan3.nextLine();
+                        listaProducto.get(i).setDescripcion(nuevoDescripcion);
+                        opcion = 0;
+                        break;
+                    case 2:
+                        opcion = 0;
+                        break;
+                    default:
+                        System.out.println("Opción no existe");
+                }
+
+            }
+
+        }
     }
   
   
