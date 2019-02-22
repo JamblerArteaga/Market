@@ -1,51 +1,72 @@
 package Clases;
 
+import Controladores.CajaControlador;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Login {
 
     ArrayList<Login> listaUsuarios = new ArrayList<Login>();
-    Empleado emp = new Empleado();
     Cliente cl = new Cliente();
     Scanner scan = new Scanner(System.in);
-
-    public Login(String usuario, String contrasenia) {
-        this.usuario = usuario;
-        this.contrasenia = contrasenia;
-
+    private Empleado usuario_logueado = null;
+    
+   
+    public static Login instance;
+    
+     public static Login instance(){
+        if(instance == null){
+            instance = new Login();
+        }
+        
+        return instance;
+    }
+    
+    public Login(){
     }
 
-    public String getUsuario() {
-        return usuario;
+    public Empleado getUsuario_logueado() {
+        return usuario_logueado;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setUsuario_logueado(Empleado usuario_logueado) {
+        this.usuario_logueado = usuario_logueado;
     }
-
-    public String getContrasenia() {
-        return contrasenia;
+    
+    
+    public void inicio(){
+        //Intentos de login
+        do{
+            System.out.println("Ingrese su usuario:");
+            Scanner scan = new Scanner(System.in);
+            String usuarioIngresado = scan.nextLine();
+            System.out.println("Ingrese su contraseña:");
+            String contraseniaIngresado = scan.nextLine();
+        
+            this.usuario_logueado = Empleado.instance().intentoLogin(usuarioIngresado, contraseniaIngresado);
+            
+            if (this.usuario_logueado == null){
+                System.out.println("\n\nEl usuario y la contraseña no coincide con nuestros registros vuelve a intentar.\n\n");
+            }
+        }while(this.usuario_logueado == null );
+        
+        this.ingresar_sistema();
     }
-
-    public void setContrasenia(String contrasenia) {
-        this.contrasenia = contrasenia;
-    }
-    private String usuario;
-    private String contrasenia;
 
     public void ingresar_sistema() {
-        if (listaUsuarios.size() == 0) {
-            listaUsuarios.add(new Login("admin", "admin"));
-            listaUsuarios.add(new Login("cajero", "cajero"));
-        }
         String validacion = "";
         int opcion = 0;
+        
+        /**
+         * ************INTENTO DE LOGIN************************
+         */
         /**
          * ************INICIO ACCIONES GERENTE GENERAL************************
          */
-        if (this.getUsuario().equals(listaUsuarios.get(0).usuario) && this.getContrasenia().equals(listaUsuarios.get(0).contrasenia)) {
-            System.out.println("\n");
+        
+        switch(this.usuario_logueado.getRol()){
+            case "Gerente Tienda":
+                 System.out.println("\n");
             System.out.println("BIENVENIDO ADMINISTRADOR");
 
             System.out.println("¿Que desea hacer?:");
@@ -93,12 +114,12 @@ public class Login {
                             switch (opcion) {
                                 case 1:
                                     validacion = "crearCajero";
-                                    emp.crear_empleado("cajero");
+                                    Empleado.instance().crear_empleado("cajero");
                                     this.ingresar_sistema();
                                     break;
                                 case 2:
                                     validacion = "crearGerenteTienda";
-                                    emp.crear_empleado("gerente");
+                                    Empleado.instance().crear_empleado("gerente");
                                     this.ingresar_sistema();
                                     break;
                                 default:
@@ -107,12 +128,12 @@ public class Login {
                             break;
                         case 2:
 
-                            emp.actualizar_empleado();
+                            Empleado.instance().actualizar_empleado();
                             this.ingresar_sistema();
 
                             break;
                         case 3:
-                            emp.ver_personal();
+                            Empleado.instance().ver_personal();
                             this.ingresar_sistema();
                             break;
                         default:
@@ -130,39 +151,27 @@ public class Login {
             /**
              * ************FIN ACCIONES GERENTE GENERAL************************
              */
-            /**
-             * ************INICIO ACCIONES CAJERO ************************
-             */
-        } else if (this.getUsuario().equals(listaUsuarios.get(1).usuario) && this.getContrasenia().equals(listaUsuarios.get(1).contrasenia)) {
-            System.out.println("\n");
+                break;
+                
+            case "Cajero":
+                
+                 System.out.println("\n");
             System.out.println("BIENVENIDO CAJERO");
             System.out.println("¿Que desea hacer?:");
             System.out.println("1. Crear factura");
-            System.out.println("2. Agregar detalle");
-            System.out.println("3. Calcular total");
-            System.out.println("4. Registrar cliente");
-            System.out.println("5. Asignar metodo de pago");
-            System.out.println("6. Desplegar reporte");
-            System.out.println("7. Crear cliente");
+            System.out.println("2. Hacer corte y desplegar reporte");
+            System.out.println("3. Crear cliente");
             opcion = scan.nextInt();
             switch (opcion) {
                 case 1:
-
+                    CajaControlador.instance().registrarFactura();
+                    this.ingresar_sistema();
                     break;
                 case 2:
-
                     break;
                 case 3:
-
-                    break;
-                case 4:
-
-                    break;
-                case 5:
-
-                    break;
-                case 6:
-
+                    Cliente.instance().crear_cliente();
+                    this.ingresar_sistema();
                     break;
                 default:
                     System.out.println("Opción no existe");
@@ -170,6 +179,8 @@ public class Login {
             /**
              * ************FIN ACCIONES CAJERO************************
              */
+            
+                break;
         }
         // return validacion;
     }

@@ -4,6 +4,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Cliente {
+    
+     public static Cliente instance;
+     public static Cliente instance(){
+        if(instance == null){
+            instance = new Cliente();
+        }
+        
+        return instance;
+    }
 
     ArrayList<Cliente> listaClientes = new ArrayList<Cliente>();
     public int idN = 0;
@@ -62,7 +71,7 @@ public class Cliente {
     private String apellido;
     private String NIT;
 
-    public void crear_cliente() {
+    public Cliente crear_cliente() {
         Scanner scan = new Scanner(System.in);
         String nombreCl = "";
         String apellidoCl = "";
@@ -74,8 +83,11 @@ public class Cliente {
         apellidoCl = scan.nextLine();
         System.out.println("Ingrese NIT del cliente");
         NITCl = scan.nextLine();
-        listaClientes.add(new Cliente(idN++, nombreCl, apellidoCl, NITCl));
+        
+        Cliente cliente = new Cliente(idN++, nombreCl, apellidoCl, NITCl);
+        listaClientes.add(cliente);
 
+        return cliente;
     }
 
     public void ver_clientes() {
@@ -85,4 +97,16 @@ public class Cliente {
                     + " NIT: " + listaClientes.get(i).NIT);
         }
     }
+    
+    public Cliente buscarCliente(String NIT){
+      
+        for(Cliente cliente : this.listaClientes){
+            if(cliente.getNIT().equals( NIT)){
+                return cliente;
+            }
+        }
+        
+        return null;
+    }
+    
 }

@@ -8,6 +8,16 @@ public class Empleado {
     ArrayList<Empleado> listaEmpleados = new ArrayList<Empleado>();
 
     public int idN = 0;
+    
+    public static Empleado instance = null;
+    
+     public static Empleado instance(){
+        if(instance == null){
+            instance = new Empleado();
+        }
+        
+        return instance;
+    }
 
     public Empleado(int id, String name, String lastName, String rol, String usuario, String contrasenia, String local, String caja, boolean estado) {
         this.id = id;
@@ -28,13 +38,12 @@ public class Empleado {
     }
 
     public Empleado() {
-
-        listaEmpleados.add(new Empleado(idN++, "Pedro jose", "Perez Rodriguez", "Cajero", "cajero", "cajero", "local 1", "caja 2", true));
-        listaEmpleados.add(new Empleado(idN++, "Maria", "Perez Marroquin", "Cajero", "cajero", "cajero", "local 1", "caja 1", true));
-        listaEmpleados.add(new Empleado(idN++, "Juan Ramon", "Velasquez", "Cajero", "cajero", "cajero", "local 2", "caja 2", true));
-        listaEmpleados.add(new Empleado(idN++, "Juan Carlos", "Vasquez", "Gerente Tienda", "admin", "admin", "local 1", "caja 2", true));
-        listaEmpleados.add(new Empleado(idN++, "Alejandro", "Argueta Marroquin", "Gerente Tienda", "admin", "admin", "local 2", "caja 1", true));
-        listaEmpleados.add(new Empleado(idN++, "Pedro", "Echavarria", "Cajero", "cajero", "cajero", "local 2", "caja 1", true));
+        listaEmpleados.add(new Empleado(idN++, "Pedro jose", "Perez Rodriguez", "Cajero", "cajero1", "cajero", "local 1", "caja 2", true));
+        listaEmpleados.add(new Empleado(idN++, "Maria", "Perez Marroquin", "Cajero", "cajero2", "cajero", "local 1", "caja 1", true));
+        listaEmpleados.add(new Empleado(idN++, "Juan Ramon", "Velasquez", "Cajero", "cajero3", "cajero", "local 2", "caja 2", true));
+        listaEmpleados.add(new Empleado(idN++, "Juan Carlos", "Vasquez", "Gerente Tienda", "admin1", "admin", "local 1", "caja 2", true));
+        listaEmpleados.add(new Empleado(idN++, "Alejandro", "Argueta Marroquin", "Gerente Tienda", "admin2", "admin", "local 2", "caja 1", true));
+        listaEmpleados.add(new Empleado(idN++, "Pedro", "Echavarria", "Cajero", "cajero3", "cajero", "local 2", "caja 1", true));
     }
 
     public int getId() {
@@ -356,5 +365,16 @@ public class Empleado {
                     + " CAJA_DE_TRABAJO: " + listaEmpleados.get(i).caja + " ESTADO_ACTUAL: " + listaEmpleados.get(i).estado);
         }
 
+    }
+    
+    
+    public Empleado intentoLogin(String usuario, String contrasena){
+        for (Empleado empleado : this.listaEmpleados) {
+            if(empleado.getUsuario().equals(usuario)  && empleado.getContrasenia().equals(contrasena) ){
+                return empleado;
+            }
+        }
+        
+        return null;
     }
 }
