@@ -14,13 +14,17 @@ public class DetalleFactura {
     private Producto producto;
     private int cantidad;
     private Double total;
+    private static int tID=0;
 
     public DetalleFactura(){
+        tID++;
+        this.id = tID;
         
     }
     
-    public DetalleFactura(int id, Producto producto, int cantidad, Double total) {
-        this.id = id;
+    public DetalleFactura(Producto producto, int cantidad, Double total) {
+        tID++;
+        this.id = tID;
         this.producto = producto;
         this.cantidad = cantidad;
         this.total = total;

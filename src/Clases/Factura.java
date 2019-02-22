@@ -18,12 +18,17 @@ public class Factura {
     private Empleado empleado;
     private ArrayList<DetalleFactura> detalles;
     private TipoPago tipoPago;
+    private static int tID=0;
 
     public Factura(){
+        tID++;
+        this.id = tID;
     }
     
-    public Factura(int id, Date fecha, Cliente cliente, Empleado empleado, ArrayList<DetalleFactura> detalles, TipoPago tipoPago) {
-        this.id = id;
+    public Factura(Date fecha, Cliente cliente, Empleado empleado, ArrayList<DetalleFactura> detalles, TipoPago tipoPago) {
+        
+        tID++;
+        this.id = tID;
         this.fecha = fecha;
         this.cliente = cliente;
         this.empleado = empleado;
@@ -79,5 +84,12 @@ public class Factura {
         this.tipoPago = tipoPago;
     }
     
-    
+    public Double getTotal(){
+        Double total = 0.00;
+        for(DetalleFactura detalle: this.detalles){
+            total+= detalle.getTotal();
+        }
+        
+        return total;
+    }
 }

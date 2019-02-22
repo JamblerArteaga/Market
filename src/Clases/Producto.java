@@ -14,7 +14,18 @@ public class Producto {
     ArrayList<Producto> listaProducto = new ArrayList<Producto>();
 
     public int idN = 0;
-
+    
+    public static Producto instance = null;
+    
+     public static Producto instance(){
+        if(instance == null){
+            instance = new Producto();
+        }
+        
+        return instance;
+    }
+    
+    
     public Producto(int id, String titulo, double precio, String descripcion) {
         this.id = id;
         this.titulo = titulo;
@@ -114,4 +125,14 @@ public class Producto {
                     + " DESCRIPCION: " + listaProducto.get(i).descripcion);
         }
     }
+  
+  
+  public Producto buscar_producto(int id){
+      for(Producto producto: this.listaProducto){
+          if(producto.getId() == id){
+              return producto;
+          }
+      }
+      return null;
+  }
 }

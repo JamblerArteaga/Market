@@ -24,9 +24,9 @@ public class TipoPagoControlador {
     }
      
      public TipoPagoControlador(){
-         this.tipos_de_pago.add(new TipoPago(1, "Efectivo"));
-         this.tipos_de_pago.add(new TipoPago(2, "Cheque"));
-         this.tipos_de_pago.add(new TipoPago(3, "Linea de Credito"));
+         this.tipos_de_pago.add(new TipoPago(1, "Efectivo", true));
+         this.tipos_de_pago.add(new TipoPago(2, "Cheque", true));
+         this.tipos_de_pago.add(new TipoPago(3, "Linea de Credito", false));
      }
 
     public ArrayList<TipoPago> getTipos_de_pago() {

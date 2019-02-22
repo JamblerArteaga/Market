@@ -12,11 +12,13 @@ package Clases;
 public class TipoPago {
     private int id;
     private String formaPago;
+    private boolean aBanco;
 
-    public TipoPago(int id, String formaPago) {
+    public TipoPago(int id, String formaPago, boolean aBanco) {
         this.id = id;
         this.formaPago = formaPago;
-    }
+        this.aBanco = aBanco;
+    }    
 
     public int getId() {
         return id;
@@ -33,5 +35,14 @@ public class TipoPago {
     public void setFormaPago(String formaPago) {
         this.formaPago = formaPago;
     }
+
+    public boolean isaBanco() {
+        return aBanco;
+    }
+
+    public void setaBanco(boolean aBanco) {
+        this.aBanco = aBanco;
+    }
+
     
 }

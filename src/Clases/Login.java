@@ -172,6 +172,7 @@ public class Login {
             System.out.println("1. Crear factura");
             System.out.println("2. Hacer corte y desplegar reporte");
             System.out.println("3. Crear cliente");
+            System.out.println("4. Logout");
             opcion = scan.nextInt();
             switch (opcion) {
                 case 1:
@@ -179,13 +180,21 @@ public class Login {
                     this.ingresar_sistema();
                     break;
                 case 2:
+                    CajaControlador.instance().desplegarReporte();
+                    this.ingresar_sistema();
                     break;
                 case 3:
                     Cliente.instance().crear_cliente();
                     this.ingresar_sistema();
                     break;
+                    
+                case 4:
+                    this.usuario_logueado = null;
+                    break;
                 default:
                     System.out.println("Opción no existe");
+                    this.ingresar_sistema();
+                    break;
             }
             /**
              * ************FIN ACCIONES CAJERO************************
