@@ -101,8 +101,86 @@ public class Producto {
         descripcionPr = scanSTR.nextLine();
         
         listaProducto.add(new Producto(idN++, tituloPr, precioPr, descripcionPr));
-        int a=0;
+        
 
+    }
+    
+    public void actualizar_pruducto() {
+        Scanner scan = new Scanner(System.in);
+        Scanner scan2 = new Scanner(System.in).useLocale(Locale.US);
+        Scanner scan3 = new Scanner(System.in);
+        
+        int opcionActualizar = 0;
+        int opcion = 0;
+        String nuevoTitulo = "";
+        double nuevoPrecio = 0.00;
+        String nuevoDescripcion ="";
+        
+        
+        System.out.println("Ingrese el ID del producto que desea actualizar");
+        opcionActualizar = scan.nextInt();
+        for (int i = 0; i < listaProducto.size(); i++) {
+            if (opcionActualizar == listaProducto.get(i).id) {
+                System.out.println("El titulo es: " + listaProducto.get(i).titulo);
+                System.out.println("Desea actualizarlo?");
+                System.out.println("1. SI");
+                System.out.println("2. NO");
+                opcion = scan.nextInt();
+                switch (opcion) {
+                    case 1:
+                        System.out.println("Ingrese nuevo titulo");
+                        nuevoTitulo = scan2.nextLine();
+                        listaProducto.get(i).setTitulo(nuevoTitulo);
+                        opcion = 0;
+                        break;
+                    case 2:
+                        opcion = 0;
+                        break;
+                    default:
+                        System.out.println("Opción no existe");
+                }
+                
+                
+                System.out.println("El precio es: " + listaProducto.get(i).precio);
+                System.out.println("Desea actualizarlo?");
+                System.out.println("1. SI");
+                System.out.println("2. NO");
+                opcion = scan.nextInt();
+                switch (opcion) {
+                    case 1:
+                        System.out.println("Ingrese nuevo precio");
+                        nuevoPrecio = scan2.nextDouble();
+                        listaProducto.get(i).setPrecio(nuevoPrecio);
+                        opcion = 0;
+                        break;
+                    case 2:
+                        opcion = 0;
+                        break;
+                    default:
+                        System.out.println("Opción no existe");
+                }
+                System.out.println("La Descripcion es: " + listaProducto.get(i).descripcion);
+                System.out.println("Desea actualizarlo?");
+                System.out.println("1. SI");
+                System.out.println("2. NO");
+                opcion = scan.nextInt();
+                switch (opcion) {
+                    case 1:
+                        System.out.println("Ingrese nueva descripcion");
+                        nuevoDescripcion = scan3.nextLine();
+                        listaProducto.get(i).setDescripcion(nuevoDescripcion);
+                        opcion = 0;
+                        break;
+                    case 2:
+                        opcion = 0;
+                        break;
+                    default:
+                        System.out.println("Opción no existe");
+                }
+
+            }
+
+        }
     }
   
   
