@@ -8,6 +8,7 @@ public class Login {
 
     ArrayList<Login> listaUsuarios = new ArrayList<Login>();
     Cliente cl = new Cliente();
+    Producto Pr = new Producto();
     Scanner scan = new Scanner(System.in);
     private Empleado usuario_logueado = null;
     
@@ -76,6 +77,8 @@ public class Login {
             System.out.println("4. Administración de locales");
             System.out.println("5. Administrar personal");
             System.out.println("6. Ver Clientes");
+            System.out.println("7. Agregar productos");
+            System.out.println("8. Ver Productos");
             opcion = scan.nextInt();
             switch (opcion) {
                 case 1:
@@ -145,6 +148,14 @@ public class Login {
                     cl.ver_clientes();
                     this.ingresar_sistema();
                     break;
+                 case 7:
+                    Pr.crear_producto();
+                    this.ingresar_sistema();
+                    break;
+                case 8:
+                    Pr.ver_producto();
+                    this.ingresar_sistema();
+                    break; 
                 default:
                     System.out.println("Opción no existe");
             }
