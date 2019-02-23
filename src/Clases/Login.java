@@ -9,6 +9,8 @@ public class Login {
     ArrayList<Login> listaUsuarios = new ArrayList<Login>();
     Cliente cl = new Cliente();
     Producto Pr = new Producto();
+    
+    LineaCredito linCre = new LineaCredito();
     Scanner scan = new Scanner(System.in);
     private Empleado usuario_logueado = null;
     
@@ -90,19 +92,24 @@ public class Login {
                     this.ingresar_sistema();
                     break;
                 case 3:
-                    System.out.println("1. Crear nueva linea de credito");
-                    System.out.println("2. Asignar nueva linea de credito");
-                    opcion = scan.nextInt();
-                    switch (opcion) {
-                        case 1:
-
-                            break;
-                        case 2:
-
-                            break;
-                        default:
-                            System.out.println("Opcion no existe");
-                    }
+                    Scanner scanCre = new Scanner(System.in);
+                    Scanner scanDoubleCre = new Scanner (System.in).useLocale(Locale.US);
+                    String numFact = "";
+                    String nombreCl = "";
+                    String NITCl = "";
+                    String valorCL = "0.00";
+                    System.out.println("En esta opción se deben de crear/asignar las lineas de creditos ");
+                    System.out.println("");
+                    System.out.println("Ingrese numero de factura");
+                    numFact =scanCre.nextLine();
+                    System.out.println("Ingrese nombre de cliente");
+                    nombreCl =scanCre.nextLine();
+                    System.out.println("Ingrese NIT de cliente");
+                    NITCl =scanCre.nextLine();
+                    System.out.println("Ingrese monto a cobrar");
+                    valorCL =scanCre.nextLine();
+                    linCre.crear_linea_credito(numFact, nombreCl, NITCl, valorCL);
+                    this.ingresar_sistema();
                     break;
                 case 4:
                     break;
