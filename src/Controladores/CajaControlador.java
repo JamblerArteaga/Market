@@ -43,7 +43,9 @@ public class CajaControlador {
     }
      
      //PROCESO DE REGISTRO DE FACTURA
-      public void registrarFactura(){
+      public boolean registrarFactura(){
+          
+          Helper.instance().clean();
          Scanner sc = new Scanner(System.in);
          Factura factura = new Factura();
          System.out.println("Ingrese el NIT del cliente.");
@@ -82,6 +84,7 @@ public class CajaControlador {
              System.out.println("1. Agregar Detalle");
              System.out.println("2. Eliminar Detalle");
              System.out.println("3. Terminar Facturacion");
+             System.out.println("4. Cancelar Factura");
              
              choice = sc.next();
              
@@ -137,6 +140,9 @@ public class CajaControlador {
                  case "3":
                      
                      break;
+                     
+                 case "4":
+                     return true;
                  default:
                      System.out.println("Por favor elija una opcion valida");
                      break;
@@ -155,18 +161,42 @@ public class CajaControlador {
                System.out.println(pago.getId()+". "+pago.getFormaPago());
             }
             
-           tipoPago = TipoPagoControlador.instance().buscar(sc.nextInt());
+               System.out.println("4. Cancelar factura");
+            
+              int id_tipo_pago = sc.nextInt();
+              
+              if(id_tipo_pago == 4){
+                  return true;
+              }
+               
+           tipoPago = TipoPagoControlador.instance().buscar(id_tipo_pago);
+           
            
            if(tipoPago == null){
                System.out.print("\n\nSelecciona un tipo de pago valido\n\n");
            }
+           
+           
+           if(LineaCredito.instance().buscar_linea_credito(cliente.getNIT()) != null){
+               System.out.print("\n\nEl usuario ya cuenta con una linea de credito activa por favor selecciona otro metodo de pago\n\n");
+               tipoPago = null;
+           }
          
          }while(tipoPago == null);
          
+         
+         
          factura.setTipoPago(tipoPago);
+         
+         if(tipoPago.getId() == 3){
+             LineaCredito.instance().crear_linea_credito(String.valueOf(factura.getId()), cliente.getNombre(), cliente.getNIT(), factura.getTotal().toString());
+         }
+         
          factura.setFecha(new Date());
          
          this.facturas.add(factura);
+         
+         return true;
      }
       
       

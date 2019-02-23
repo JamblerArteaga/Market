@@ -14,6 +14,16 @@ public class LineaCredito {
 
     public int idN = 0;
     
+     public static LineaCredito instance;
+    
+     public static LineaCredito instance(){
+        if(instance == null){
+            instance = new LineaCredito();
+        }
+        
+        return instance;
+    }
+    
     public int getId() {
         return id;
     }
@@ -89,6 +99,7 @@ public class LineaCredito {
         this.id = id;
         this.factura = factura;
         this.cliente = cliente;
+        this.NITCliente = NITCliente;
         this.plazo = plazo;
         this.fechaVencimiento = fechaVencimiento;
         this.fechaRegistro = fechaRegistro;
@@ -144,5 +155,14 @@ public class LineaCredito {
         
     }
     
-    
+    public LineaCredito buscar_linea_credito(String NIT){
+        for (LineaCredito linea : this.listaLineasCredito){
+            
+            if(linea != null && linea.getNITCliente().equals(NIT)){
+                return linea;
+            }
+        }
+        
+        return null;
+    }
 }

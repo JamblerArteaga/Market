@@ -2,6 +2,7 @@ package Clases;
 
 import Controladores.CajaControlador;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Login {
@@ -57,6 +58,7 @@ public class Login {
     }
 
     public void ingresar_sistema() {
+        Helper.instance().clean();
         String validacion = "";
         int opcion = 0;
         
@@ -82,6 +84,7 @@ public class Login {
             System.out.println("7. Agregar productos");
             System.out.println("8. Ver Productos");
             System.out.println("9. Actualizar Producto");
+            System.out.println("10. Logout");
                 
             opcion = scan.nextInt();
             switch (opcion) {
@@ -169,9 +172,12 @@ public class Login {
                     Pr.actualizar_pruducto();
                     this.ingresar_sistema();
                     break;
-                    
+                case 10:
+                    this.usuario_logueado = null;
+                    break;
                 default:
                     System.out.println("Opción no existe");
+                    this.ingresar_sistema();
             }
             /**
              * ************FIN ACCIONES GERENTE GENERAL************************
